@@ -204,7 +204,7 @@ export default function (step, staticStep) {
       title: '感电反应造成的伤害提升[electroCharged]%，月感电反应造成的伤害提升[lunarCharged]%',
       data: {
         electroCharged: ({ refine }) => step(48)[refine],
-        lunarCharged: ({ params, refine }) => step(12)[refine] * (params.Moonsign || 0) >= 2 ? 2 : 1
+        lunarCharged: ({ params, refine }) => step(12)[refine] * ((params.Moonsign || 0) >= 2 ? 2 : 1)
       }
     },
     血染荒城: {
@@ -212,6 +212,13 @@ export default function (step, staticStep) {
       data: {
         lunarCharged: ({ refine }) => step(36)[refine],
         cdmg: ({ element, refine }) => ['水', '雷', '风'].includes(element) ? step(28)[refine] : 0
+      }
+    },
+    圣祭者的辉杖: {
+      title: '攻击力提升[atkPct]%，元素充能效率提升[recharge]%',
+      refine: {
+        atkPct: step(8 * 3),
+        recharge: step(12 * 3)
       }
     }
   }

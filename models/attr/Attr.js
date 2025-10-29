@@ -25,7 +25,7 @@ class Attr extends Base {
   }
 
   static calcPromote (lv, game = 'gs') {
-    let lvs = game === 'gs' ? [1, 20, 40, 50, 60, 70, 80, 90] : [1, 20, 30, 40, 50, 60, 70, 80]
+    let lvs = game === 'gs' ? [1, 20, 40, 50, 60, 70, 80, 90, 100] : [1, 20, 30, 40, 50, 60, 70, 80]
     let promote = 0
     for (let idx = 0; idx <= lvs.length - 1; idx++) {
       if (lv >= lvs[idx] && lv <= lvs[idx + 1]) {
@@ -92,7 +92,7 @@ class Attr extends Base {
     let { keys = {}, details = {} } = metaAttr
     let lvLeft = 0
     let lvRight = 0
-    let lvStep = [1, 20, 40, 50, 60, 70, 80, 90]
+    let lvStep = [1, 20, 40, 50, 60, 70, 80, 90, 100]
     let currPromote = 0
     for (let idx = 0; idx < lvStep.length - 1; idx++) {
       if (currPromote === promote) {
@@ -120,6 +120,21 @@ class Attr extends Base {
     this.addAttr('atkBase', getLvData(1), true)
     this.addAttr('defBase', getLvData(2), true)
     this.addAttr(keys[3], getLvData(3, true), !/(hp|atk|def)/.test(keys[3]))
+
+    // 特有角色自带属性
+    const Characters = [
+      { id: 10000119, attrs: { mastery: 200 } }, // 菈乌玛: +200 元素精通
+      { id: 10000122, attrs: { mastery: 100 } }, // 奈芙尔: +100 元素精通
+      // 后续角色兼容
+    ]
+
+    const charBuff = Characters.find(c => c.id === char.id)
+
+    if (charBuff) {
+      for (const key in charBuff.attrs) {
+        this.addAttr(key, charBuff.attrs[key], true)
+      }
+    }
 
     let charBuffs = char.getCalcRule()
     lodash.forEach(charBuffs.buffs, (buff) => {

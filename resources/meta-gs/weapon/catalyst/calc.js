@@ -237,7 +237,7 @@ export default function (step, staticStep) {
       title: '绽放反应造成的伤害提升[bloom]%，月绽放反应造成的伤害提升[lunarBloom]%',
       data: {
         bloom: ({ refine }) => step(48)[refine],
-        lunarBloom: ({ params, refine }) => step(12)[refine] * (params.Moonsign || 0) >= 2 ? 2 : 1
+        lunarBloom: ({ params, refine }) => step(12)[refine] * ((params.Moonsign || 0) >= 2 ? 2 : 1)
       }
     },
     纺夜天镜: {
@@ -249,6 +249,19 @@ export default function (step, staticStep) {
         hyperBloom: ({ params, refine, element }) => (((params.Moonsign || 0) >= 1 ? 1 : 0) + (['水', '草'].includes(element) ? 1 : 0)) === 2 ? step(80)[refine] : 0,
         lunarBloom: ({ params, refine, element }) => (((params.Moonsign || 0) >= 1 ? 1 : 0) + (['水', '草'].includes(element) ? 1 : 0)) === 2 ? step(40)[refine] : 0
       }
-    }
+    },
+    霜辰: {
+      title: '元素精通提升[mastery]',
+      refine: {
+        mastery: step(120)
+      }
+    },
+    真语秘匣: [staticStep('cpct', 8), {
+      title: '施放元素战技时元素精通提升[mastery]%, 暴击伤害提升[cdmg]%',
+      data: {
+        mastery: ({ params, refine }) => ((params.Moonsign || 0) >= 1 ? 1.5 : 1) * step(80)[refine],
+        cdmg: ({ params, refine }) => ((params.Moonsign || 0) >= 1 ? 1.5 : 1) * step(24)[refine]
+      }
+    }]
   }
 }

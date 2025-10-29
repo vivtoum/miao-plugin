@@ -196,12 +196,13 @@ const buffs = {
   如雷的盛怒: {
     2: attr('dmg', 15, '雷'),
     4: {
-      title: '超载、感电、超导反应造成的伤害提升40%，超激化反应带来的伤害提升提高20%',
+      title: '超载、感电、超导反应造成的伤害提升40%，超激化反应带来的伤害提升提高20%，月感电反应造成的伤害提升[lunarCharged]%',
       data: {
         overloaded: 40,
         electroCharged: 40,
         superConduct: 40,
-        aggravate: 20
+        aggravate: 20,
+        lunarCharged: 20
       }
     }
   },
@@ -403,11 +404,12 @@ const buffs = {
   乐园遗落之花: {
     2: attr('mastery', 80),
     4: {
-      title: '满层提高绽放、超绽放、烈绽放反应造成的伤害提升80%',
+      title: '满层提高绽放、超绽放、烈绽放反应造成的伤害提升80%,月绽放反应伤害提升[lunarBloom]%',
       data: {
         bloom: 80,
         burgeon: 80,
-        hyperBloom: 80
+        hyperBloom: 80,
+        lunarBloom: 20
       }
     }
   },
