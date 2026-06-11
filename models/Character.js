@@ -18,7 +18,7 @@ const detailKey = 'title,allegiance,birth,astro,desc,cncv,jpcv,costume,baseAttr,
 
 class Character extends Base {
   // 含加强数据的角色id
-  static enhancedCharIds = [1212, 1205, 1005, 1006]
+  static enhancedCharIds = [1212, 1205, 1005, 1006, 1004, 1102, 1217, 1310, 1306, 1307]
   // 默认获取的数据
   static _dataKey = 'id,name,abbr,title,star,elem,allegiance,weapon,birthday,astro,cncv,jpcv,desc,talentCons'
 
@@ -55,8 +55,8 @@ class Character extends Base {
   // 是否为实装官方角色
   get isRelease () {
     if (this.isCustom) return false
-    if (Cfg.get('notReleasedData')) return true
     if (this.eta) return this.eta * 1 < new Date() * 1
+    if (Cfg.get('notReleasedData')) return true
     return false
   }
 
@@ -264,7 +264,8 @@ class Character extends Base {
         '004': 't',
         '007': 'z',
         "301": "me",
-        "302": "mt"
+        "302": "mt",
+        "420": "xe",
       }[id]
     }
     return false
