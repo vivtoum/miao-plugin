@@ -40,7 +40,7 @@ let DmgAttr = {
     })
 
     // 技能属性记录
-    lodash.forEach((game === 'gs' ? 'a,a2,a3,e,q,nightsoul' : 'a,a2,a3,e,e2,xe,q,q2,t,me,me2,mt,mt2,dot,break,elation').split(','), (key) => {
+    lodash.forEach((game === 'gs' ? 'a,a2,a3,e,q,nightsoul' : 'a,a2,a3,e,e2,xe,q,q2,q3,t,t2,me,me2,mt,mt2,dot,break,elation').split(','), (key) => {
       ret[key] = ret[key] || {
         pct: 0, // 倍率加成
         multi: 0, // 独立倍率乘区加成，宵宫E等
@@ -98,6 +98,7 @@ let DmgAttr = {
         ret.lunarCharged = 0 // 月感电
         ret.lunarBloom = 0 // 月绽放
         ret.lunarCrystallize = 0 // 月结晶
+        ret.stellarConduct = 0 // 星超导
         ret.fykx = 0 // 敌人反应抗性降低
         ret.fyinc = 0 // 反应伤害值提升（百分比/不受精通加成）
         ret.fyplus = 0 // 反应伤害值提升（数值/不受精通加成）
@@ -213,7 +214,7 @@ let DmgAttr = {
         title = title.replace(`[${key}]`, Format.comma(val, 1))
 
         // 技能提高
-        let tRet = /^(a|a2|a3|e|e2|q|q2|t|me|xe|xe2|mt|dot|break|nightsoul)(Def|Ignore|Dmg|Enemydmg|Plus|Pct|Cpct|Cdmg|Multi|Elevated|Merrymakes)$/.exec(key)
+        let tRet = /^(a|a2|a3|e|e2|q|q2|q3|t|t2|me|xe|xe2|mt|dot|break|nightsoul)(Def|Ignore|Dmg|Enemydmg|Plus|Pct|Cpct|Cdmg|Multi|Elevated|Merrymakes)$/.exec(key)
         if (tRet) {
           attr[tRet[1]][tRet[2].toLowerCase()] += val * 1 || 0
           return
@@ -241,7 +242,7 @@ let DmgAttr = {
           return
         }
 
-        if (['vaporize', 'melt', 'crystallize', 'burning', 'superConduct', 'swirl', 'electroCharged', 'shatter', 'overloaded', 'bloom', 'burgeon', 'hyperBloom', 'aggravate', 'spread', 'elevated', 'lunarCharged', 'lunarBloom', 'lunarCrystallize', 'kx', 'fykx', 'multi', 'fyplus', 'fypct', 'fybase', 'fyinc', 'merrymakes', 'punchline'].includes(key)) {
+        if (['vaporize', 'melt', 'crystallize', 'burning', 'superConduct', 'swirl', 'electroCharged', 'shatter', 'overloaded', 'bloom', 'burgeon', 'hyperBloom', 'aggravate', 'spread', 'elevated', 'lunarCharged', 'lunarBloom', 'lunarCrystallize', 'stellarConduct', 'kx', 'fykx', 'multi', 'fyplus', 'fypct', 'fybase', 'fyinc', 'merrymakes', 'punchline'].includes(key)) {
           attr[key] += val * 1 || 0
           return
         }
